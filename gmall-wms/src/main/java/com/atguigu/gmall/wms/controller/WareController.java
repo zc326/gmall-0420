@@ -1,4 +1,4 @@
-package com.atguigu.gmall.pms.controller;
+package com.atguigu.gmall.wms.controller;
 
 import java.util.List;
 
@@ -13,40 +13,34 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.atguigu.gmall.pms.entity.SpuEntity;
-import com.atguigu.gmall.pms.service.SpuService;
+import com.atguigu.gmall.wms.entity.WareEntity;
+import com.atguigu.gmall.wms.service.WareService;
 import com.atguigu.gmall.common.bean.PageResultVo;
 import com.atguigu.gmall.common.bean.ResponseVo;
 import com.atguigu.gmall.common.bean.PageParamVo;
 
 /**
- * spu信息
+ * 仓库信息
  *
  * @author fengge
  * @email fengge@atguigu.com
- * @date 2020-09-21 11:00:22
+ * @date 2020-09-22 21:11:55
  */
-@Api(tags = "spu信息 管理")
+@Api(tags = "仓库信息 管理")
 @RestController
-@RequestMapping("pms/spu")
-public class SpuController {
+@RequestMapping("wms/ware")
+public class WareController {
 
     @Autowired
-    private SpuService spuService;
-
-    @GetMapping("category/{categoryId}")
-    public ResponseVo<PageResultVo> querySpuByCidPage(@PathVariable("categoryId")Long cid, PageParamVo pageParamVo){
-        PageResultVo resultVo = this.spuService.querySpuByCidPage(cid, pageParamVo);
-        return ResponseVo.ok(resultVo);
-    }
+    private WareService wareService;
 
     /**
      * 列表
      */
     @GetMapping
     @ApiOperation("分页查询")
-    public ResponseVo<PageResultVo> querySpuByPage(PageParamVo paramVo){
-        PageResultVo pageResultVo = spuService.queryPage(paramVo);
+    public ResponseVo<PageResultVo> queryWareByPage(PageParamVo paramVo){
+        PageResultVo pageResultVo = wareService.queryPage(paramVo);
 
         return ResponseVo.ok(pageResultVo);
     }
@@ -57,10 +51,10 @@ public class SpuController {
      */
     @GetMapping("{id}")
     @ApiOperation("详情查询")
-    public ResponseVo<SpuEntity> querySpuById(@PathVariable("id") Long id){
-        SpuEntity spu = spuService.getById(id);
+    public ResponseVo<WareEntity> queryWareById(@PathVariable("id") Long id){
+		WareEntity ware = wareService.getById(id);
 
-        return ResponseVo.ok(spu);
+        return ResponseVo.ok(ware);
     }
 
     /**
@@ -68,8 +62,8 @@ public class SpuController {
      */
     @PostMapping
     @ApiOperation("保存")
-    public ResponseVo<Object> save(@RequestBody SpuEntity spu){
-        spuService.save(spu);
+    public ResponseVo<Object> save(@RequestBody WareEntity ware){
+		wareService.save(ware);
 
         return ResponseVo.ok();
     }
@@ -79,8 +73,8 @@ public class SpuController {
      */
     @PostMapping("/update")
     @ApiOperation("修改")
-    public ResponseVo update(@RequestBody SpuEntity spu){
-        spuService.updateById(spu);
+    public ResponseVo update(@RequestBody WareEntity ware){
+		wareService.updateById(ware);
 
         return ResponseVo.ok();
     }
@@ -91,7 +85,7 @@ public class SpuController {
     @PostMapping("/delete")
     @ApiOperation("删除")
     public ResponseVo delete(@RequestBody List<Long> ids){
-        spuService.removeByIds(ids);
+		wareService.removeByIds(ids);
 
         return ResponseVo.ok();
     }
