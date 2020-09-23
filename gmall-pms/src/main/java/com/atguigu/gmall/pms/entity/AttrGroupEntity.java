@@ -12,10 +12,10 @@ import lombok.Data;
 
 /**
  * 属性分组
- * 
+ *
  * @author fengge
  * @email fengge@atguigu.com
- * @date 2020-09-21 19:12:49
+ * @date 2020-09-21 11:00:22
  */
 @Data
 @TableName("pms_attr_group")
@@ -50,5 +50,4 @@ public class AttrGroupEntity implements Serializable {
 
 	@TableField(exist = false)
 	private List<AttrEntity> attrEntities;
-
 }

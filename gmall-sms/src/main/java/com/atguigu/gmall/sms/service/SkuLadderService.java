@@ -12,7 +12,7 @@ import java.util.Map;
  *
  * @author fengge
  * @email fengge@atguigu.com
- * @date 2020-09-21 20:19:18
+ * @date 2020-09-21 14:07:45
  */
 public interface SkuLadderService extends IService<SkuLadderEntity> {
 

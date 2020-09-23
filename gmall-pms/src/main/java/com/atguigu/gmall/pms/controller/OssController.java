@@ -22,10 +22,10 @@ public class OssController {
 
     @GetMapping("policy")
     public ResponseVo<Object> policy(){
-        String accessId = "LTAI4GBATfhCcU3mHGE9Zr8z"; // 请填写您的AccessKeyId。
-        String accessKey = "gJAQJ7CqmLlPQJGGu8sBk92eaNdxwF"; // 请填写您的AccessKeySecret。
-        String endpoint = "oss-cn-beijing.aliyuncs.com"; // 请填写您的 endpoint。
-        String bucket = "zcguli"; // 请填写您的 bucketname 。
+        String accessId = "LTAI4G8Q6ztnKu25gk987ZwF"; // 请填写您的AccessKeyId。
+        String accessKey = "6gJlu0tMnWWlt2Rd9T3YDUWkZN03ZZ"; // 请填写您的AccessKeySecret。
+        String endpoint = "oss-cn-shanghai.aliyuncs.com"; // 请填写您的 endpoint。
+        String bucket = "ggmall"; // 请填写您的 bucketname 。
         String host = "https://" + bucket + "." + endpoint; // host的格式为 bucketname.endpoint
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String dir = simpleDateFormat.format(new Date()); // 用户上传文件时指定的前缀。
@@ -54,14 +54,13 @@ public class OssController {
             respMap.put("host", host);
             respMap.put("expire", String.valueOf(expireEndTime / 1000));
             // respMap.put("expire", formatISO8601Date(expiration));
-            return ResponseVo.ok(respMap);
 
+            return ResponseVo.ok(respMap);
         } catch (Exception e) {
-            // Assert.fail(e.getMessage());
             System.out.println(e.getMessage());
         } finally {
             ossClient.shutdown();
         }
-        return ResponseVo.fail("获取签名失败");
+        return ResponseVo.fail("获取签名失败！");
     }
 }

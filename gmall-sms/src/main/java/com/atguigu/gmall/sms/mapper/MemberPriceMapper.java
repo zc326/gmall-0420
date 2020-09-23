@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
  * 
  * @author fengge
  * @email fengge@atguigu.com
- * @date 2020-09-21 20:19:18
+ * @date 2020-09-21 14:07:45
  */
 @Mapper
 public interface MemberPriceMapper extends BaseMapper<MemberPriceEntity> {

@@ -36,11 +36,14 @@ public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupMapper, AttrGroup
     }
 
     @Override
-    public List<AttrGroupEntity> queryGroupWithAttrsByCid(Long cid) {
-       List<AttrGroupEntity> groupEntities = this.list(new QueryWrapper<AttrGroupEntity>().eq("category_id", cid));
+    public List<AttrGroupEntity> queryGroupsWithAttrsByCid(Long cid) {
+        // 先查询分组
+        List<AttrGroupEntity> groupEntities = this.list(new QueryWrapper<AttrGroupEntity>().eq("category_id", cid));
         if (CollectionUtils.isEmpty(groupEntities)){
             return null;
         }
+
+        // 再查询每个分组下的规格参数
         groupEntities.forEach(attrGroupEntity -> {
             List<AttrEntity> attrEntities = this.attrMapper.selectList(new QueryWrapper<AttrEntity>().eq("group_id", attrGroupEntity.getId()).eq("type", 1));
             attrGroupEntity.setAttrEntities(attrEntities);

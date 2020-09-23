@@ -12,7 +12,7 @@ import lombok.Data;
  * 
  * @author fengge
  * @email fengge@atguigu.com
- * @date 2020-09-21 20:19:18
+ * @date 2020-09-21 14:07:45
  */
 @Data
 @TableName("sms_home_subject_spu")

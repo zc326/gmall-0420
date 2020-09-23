@@ -2,6 +2,8 @@ package com.atguigu.gmall.pms.controller;
 
 import java.util.List;
 
+import com.atguigu.gmall.pms.entity.SkuAttrValueEntity;
+import com.atguigu.gmall.pms.service.SkuAttrValueService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.atguigu.gmall.pms.entity.SkuAttrValueEntity;
-import com.atguigu.gmall.pms.service.SkuAttrValueService;
 import com.atguigu.gmall.common.bean.PageResultVo;
 import com.atguigu.gmall.common.bean.ResponseVo;
 import com.atguigu.gmall.common.bean.PageParamVo;
@@ -24,7 +23,7 @@ import com.atguigu.gmall.common.bean.PageParamVo;
  *
  * @author fengge
  * @email fengge@atguigu.com
- * @date 2020-09-21 19:12:49
+ * @date 2020-09-21 11:00:22
  */
 @Api(tags = "sku销售属性&值 管理")
 @RestController

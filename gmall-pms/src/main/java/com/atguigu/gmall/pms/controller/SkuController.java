@@ -2,6 +2,8 @@ package com.atguigu.gmall.pms.controller;
 
 import java.util.List;
 
+import com.atguigu.gmall.pms.entity.SkuEntity;
+import com.atguigu.gmall.pms.service.SkuService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -11,11 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.atguigu.gmall.pms.entity.SkuEntity;
-import com.atguigu.gmall.pms.service.SkuService;
 import com.atguigu.gmall.common.bean.PageResultVo;
 import com.atguigu.gmall.common.bean.ResponseVo;
 import com.atguigu.gmall.common.bean.PageParamVo;
@@ -25,7 +24,7 @@ import com.atguigu.gmall.common.bean.PageParamVo;
  *
  * @author fengge
  * @email fengge@atguigu.com
- * @date 2020-09-21 19:12:49
+ * @date 2020-09-21 11:00:22
  */
 @Api(tags = "sku信息 管理")
 @RestController
@@ -36,7 +35,7 @@ public class SkuController {
     private SkuService skuService;
 
     @GetMapping("spu/{spuId}")
-    public ResponseVo<List<SkuEntity>> querySkuBySpuId(@PathVariable("spuId")Long spuId){
+    public ResponseVo<List<SkuEntity>> querySkusBySpuId(@PathVariable("spuId")Long spuId){
         List<SkuEntity> skuEntities = this.skuService.list(new QueryWrapper<SkuEntity>().eq("spu_id", spuId));
         return ResponseVo.ok(skuEntities);
     }

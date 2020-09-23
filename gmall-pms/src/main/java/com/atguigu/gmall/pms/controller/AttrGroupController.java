@@ -2,6 +2,8 @@ package com.atguigu.gmall.pms.controller;
 
 import java.util.List;
 
+import com.atguigu.gmall.pms.entity.AttrGroupEntity;
+import com.atguigu.gmall.pms.service.AttrGroupService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -11,11 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.atguigu.gmall.pms.entity.AttrGroupEntity;
-import com.atguigu.gmall.pms.service.AttrGroupService;
 import com.atguigu.gmall.common.bean.PageResultVo;
 import com.atguigu.gmall.common.bean.ResponseVo;
 import com.atguigu.gmall.common.bean.PageParamVo;
@@ -25,7 +24,7 @@ import com.atguigu.gmall.common.bean.PageParamVo;
  *
  * @author fengge
  * @email fengge@atguigu.com
- * @date 2020-09-21 19:12:49
+ * @date 2020-09-21 11:00:22
  */
 @Api(tags = "属性分组 管理")
 @RestController
@@ -36,15 +35,14 @@ public class AttrGroupController {
     private AttrGroupService attrGroupService;
 
     @GetMapping("withattrs/{catId}")
-    public ResponseVo<List<AttrGroupEntity>> queryGroupWithAttrsByCid(@PathVariable("catId")Long cid){
-        List<AttrGroupEntity> attrGroupEntities= this.attrGroupService.queryGroupWithAttrsByCid(cid);
+    public ResponseVo<List<AttrGroupEntity>> queryGroupsWithAttrsByCid(@PathVariable("catId")Long cid){
+        List<AttrGroupEntity> attrGroupEntities = this.attrGroupService.queryGroupsWithAttrsByCid(cid);
         return ResponseVo.ok(attrGroupEntities);
     }
 
-
     @GetMapping("category/{cid}")
     public ResponseVo<List<AttrGroupEntity>> queryGroupsByCid(@PathVariable("cid")Long cid){
-        List<AttrGroupEntity> groupEntities = this.attrGroupService.list(new QueryWrapper<AttrGroupEntity>().eq("category_Id", cid));
+        List<AttrGroupEntity> groupEntities = this.attrGroupService.list(new QueryWrapper<AttrGroupEntity>().eq("category_id", cid));
         return ResponseVo.ok(groupEntities);
     }
 

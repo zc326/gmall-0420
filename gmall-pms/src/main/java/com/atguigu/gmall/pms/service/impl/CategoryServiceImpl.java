@@ -1,5 +1,6 @@
 package com.atguigu.gmall.pms.service.impl;
 
+import jdk.nashorn.internal.ir.IfNode;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,10 +31,13 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, CategoryEnt
 
     @Override
     public List<CategoryEntity> queryCategoriesByPid(Long pid) {
+
         QueryWrapper<CategoryEntity> wrapper = new QueryWrapper<>();
+
         if (pid != -1){
             wrapper.eq("parent_id", pid);
         }
+
         return this.list(wrapper);
     }
 
