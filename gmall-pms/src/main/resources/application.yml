@@ -4,7 +4,7 @@ feign:
   sentinel:
     enabled: true
 mybatis-plus:
-  mapper-locations: classpath:mapper/pms/**/*.xml
+  mapper-locations: classpath:mapper/pms/*.xml
   type-aliases-package: com.atguigu.gmall.pms.entity
   global-config:
     db-config:
@@ -12,3 +12,8 @@ mybatis-plus:
 logging:
   level:
     com.atguigu.gmall: debug
+spring:
+  cloud:
+    alibaba:
+      seata:
+        tx-service-group: gmall_tx_group

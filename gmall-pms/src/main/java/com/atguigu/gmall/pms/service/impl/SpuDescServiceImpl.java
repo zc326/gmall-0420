@@ -3,6 +3,7 @@ package com.atguigu.gmall.pms.service.impl;
 import com.atguigu.gmall.pms.vo.SpuVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import java.util.Map;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -30,7 +31,8 @@ public class SpuDescServiceImpl extends ServiceImpl<SpuDescMapper, SpuDescEntity
         return new PageResultVo(page);
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    //    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional
     public void saveSpuDesc(SpuVo spu, Long spuId) {
         if (!CollectionUtils.isEmpty(spu.getSpuImages())) {
             SpuDescEntity spuDescEntity = new SpuDescEntity();
@@ -38,7 +40,5 @@ public class SpuDescServiceImpl extends ServiceImpl<SpuDescMapper, SpuDescEntity
             spuDescEntity.setDecript(StringUtils.join(spu.getSpuImages(), ","));
             this.save(spuDescEntity);
         }
-
-
     }
 }

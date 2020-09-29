@@ -31,4 +31,12 @@ public class PageParamVo {
 
         return new Page<>(pageNum, pageSize);
     }
+
+    public void setPageNum(Integer pageNum) {
+
+    }
+
+    public void setPageSize(Integer pageSize) {
+
+    }
 }

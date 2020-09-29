@@ -3,6 +3,7 @@ package com.atguigu.gmall.pms.controller;
 import java.io.FileNotFoundException;
 import java.util.List;
 
+import com.alibaba.fastjson.JSON;
 import com.atguigu.gmall.pms.entity.SpuEntity;
 import com.atguigu.gmall.pms.service.SpuService;
 import com.atguigu.gmall.pms.vo.SpuVo;
@@ -39,6 +40,16 @@ public class SpuController {
     public ResponseVo<PageResultVo> querySpuByCidPage(@PathVariable("categoryId")Long cid, PageParamVo pageParamVo){
         PageResultVo resultVo = this.spuService.querySpuByCidPage(cid, pageParamVo);
         return ResponseVo.ok(resultVo);
+    }
+
+    /**
+     * 列表
+     */
+    @PostMapping("json")
+    public ResponseVo<List<SpuEntity>> querySpuByPageJson (@RequestBody PageParamVo paramVo){
+        PageResultVo pageResultVo = spuService.queryPage(paramVo);
+
+        return ResponseVo.ok((List<SpuEntity>) pageResultVo.getList());
     }
 
     /**

@@ -9,6 +9,8 @@ import com.atguigu.gmall.pms.vo.SkuVo;
 import com.atguigu.gmall.pms.vo.SpuAttrValueVo;
 import com.atguigu.gmall.pms.vo.SpuVo;
 import com.atguigu.gmall.sms.vo.SkuSaleVo;
+import com.baomidou.mybatisplus.annotation.TableField;
+import io.seata.spring.annotation.GlobalTransactional;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,8 +20,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -29,6 +33,7 @@ import com.atguigu.gmall.common.bean.PageResultVo;
 import com.atguigu.gmall.common.bean.PageParamVo;
 
 import com.atguigu.gmall.pms.mapper.SpuMapper;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
@@ -94,7 +99,8 @@ public class SpuServiceImpl extends ServiceImpl<SpuMapper, SpuEntity> implements
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class, timeout = 3, readOnly = true)
+    //@Transactional(rollbackFor = Exception.class, timeout = 3, readOnly = true)
+    @GlobalTransactional
     public void bigSave(SpuVo spu) throws FileNotFoundException {
         // 1.保存spu相关信息
         // 1.1.保存pms_spu
@@ -118,9 +124,9 @@ public class SpuServiceImpl extends ServiceImpl<SpuMapper, SpuEntity> implements
 
         // 2.保存sku相关信息
         this.saveSkus(spu, spuId);
+
+        //int i = 1/0;
     }
-
-
 
     private void saveSkus(SpuVo spu, Long spuId) {
         List<SkuVo> skus = spu.getSkus();
@@ -206,13 +212,13 @@ class Test{
     public static void main(String[] args) {
 
         List<User> users = Arrays.asList(
-            new User(1l, "柳岩", 20),
-            new User(2l, "马苏", 21),
-            new User(3l, "马蓉", 22),
-            new User(4l, "小鹿", 23),
-            new User(5l, "柏芝", 24),
-            new User(6l, "凤姐", 25),
-            new User(7l, "大幂幂", 26)
+                new User(1l, "柳岩", 20),
+                new User(2l, "马苏", 21),
+                new User(3l, "马蓉", 22),
+                new User(4l, "小鹿", 23),
+                new User(5l, "柏芝", 24),
+                new User(6l, "凤姐", 25),
+                new User(7l, "大幂幂", 26)
         );
 
         List<Integer> aa = Arrays.asList(1, 2, 3, 4, 5, 6);
