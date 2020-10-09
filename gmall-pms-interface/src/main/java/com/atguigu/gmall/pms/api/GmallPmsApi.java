@@ -3,6 +3,7 @@ package com.atguigu.gmall.pms.api;
 import com.atguigu.gmall.common.bean.PageParamVo;
 import com.atguigu.gmall.common.bean.ResponseVo;
 import com.atguigu.gmall.pms.entity.*;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,4 +33,7 @@ public interface GmallPmsApi {
     public ResponseVo<List<SpuAttrValueEntity>> querySearchSpuAttrValuesByCidAndSpuId(
             @PathVariable("cid")Long cid, @PathVariable("spuId")Long spuId
     );
+    @GetMapping("pms/spu/{id}")
+    @ApiOperation("详情查询")
+    public ResponseVo<SpuEntity> querySpuById(@PathVariable("id") Long id);
 }
