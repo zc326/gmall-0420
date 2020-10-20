@@ -9,6 +9,7 @@ import com.atguigu.gmall.pms.service.SpuService;
 import com.atguigu.gmall.pms.vo.SpuVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,6 +36,9 @@ public class SpuController {
 
     @Autowired
     private SpuService spuService;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     @GetMapping("category/{categoryId}")
     public ResponseVo<PageResultVo> querySpuByCidPage(@PathVariable("categoryId")Long cid, PageParamVo pageParamVo){
@@ -93,7 +97,7 @@ public class SpuController {
     @ApiOperation("修改")
     public ResponseVo update(@RequestBody SpuEntity spu){
 		spuService.updateById(spu);
-
+        this.rabbitTemplate.convertAndSend("PMS_SPU_EXCHANGE","item.update",spu.getId());
         return ResponseVo.ok();
     }
 

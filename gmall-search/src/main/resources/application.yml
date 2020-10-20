@@ -24,9 +24,9 @@ spring:
     cache: false
   rabbitmq:
     host: 192.168.75.131
-    virtual-host: /root
-    username: root
-    password: 123456
+    virtual-host: /fengge
+    username: fengge
+    password: fengge
     listener:
       simple:
         prefetch: 1
