@@ -11,6 +11,7 @@ import com.atguigu.gmall.oms.vo.OrderSubmitVo;
 import com.atguigu.gmall.pms.entity.*;
 import com.atguigu.gmall.ums.entity.UserAddressEntity;
 import com.atguigu.gmall.ums.entity.UserEntity;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -22,10 +23,12 @@ import com.atguigu.gmall.common.bean.PageParamVo;
 import com.atguigu.gmall.oms.mapper.OrderMapper;
 import com.atguigu.gmall.oms.entity.OrderEntity;
 import com.atguigu.gmall.oms.service.OrderService;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 
@@ -41,6 +44,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderEntity> impl
     @Autowired
     private OrderItemService itemService;
 
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
     @Override
     public PageResultVo queryPage(PageParamVo paramVo) {
         IPage<OrderEntity> page = this.page(
@@ -51,6 +57,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderEntity> impl
         return new PageResultVo(page);
     }
 
+    @Transactional
     @Override
     public OrderEntity saveOrder(OrderSubmitVo submitVo, Long userId) {
 
@@ -138,6 +145,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, OrderEntity> impl
                 return itemEntity;
             }).collect(Collectors.toList()));
         }
+
+        // 发送消息给mq
+        this.rabbitTemplate.convertAndSend("ORDER_EXCHANGE", "order.ttl", submitVo.getOrderToken());
 
         return orderEntity;
     }

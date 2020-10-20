@@ -21,6 +21,7 @@ import com.atguigu.gmall.common.bean.PageParamVo;
 import com.atguigu.gmall.wms.mapper.WareSkuMapper;
 import com.atguigu.gmall.wms.entity.WareSkuEntity;
 import com.atguigu.gmall.wms.service.WareSkuService;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 
@@ -48,6 +49,7 @@ public class WareSkuServiceImpl extends ServiceImpl<WareSkuMapper, WareSkuEntity
         return new PageResultVo(page);
     }
 
+    @Transactional
     @Override
     public List<SkuLockVo> checkAndLock(List<SkuLockVo> lockVos, String orderToken) {
 
