@@ -36,3 +36,10 @@ spring:
 feign:
   sentinel:
     enabled: true
+alipay:
+  gatewayUrl: https://openapi.alipay.com//gateway.do
+  app_id: 2021001163617452
+  merchant_private_key: MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC8Z7EZmanxyFGsK4LrIUeKKrrGxWAHIgPmUV8TtZDs+jeplJSw1ckSY63QhEU444D5qd6xruJHBuB33HG+ik4n8N8nRW
+  alipay_public_key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkWs+3gXMosiWG+EbfRyotWB0waqU3t7qMQSBxU0r3JZoND53jvWQfzrGZ8W+obMc+OgwupODDVxhG/DEKVBIptuUQYdvAjCSH9
+  notify_url: http://wh399wlif0.54http.tech/pay/success
+  return_url: http://wh399wlif0.54http.tech/pay/ok
